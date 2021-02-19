@@ -8,3 +8,5 @@ When all information on the team member has been entered, the user is asked whet
 
 ![Power](https://user-images.githubusercontent.com/74007392/108450682-9abe6680-7233-11eb-934d-e64fb2f56654.PNG)
 This is the generate output HTML after running the code as you can see we have Profile cards for each member I unfourntunately am trying to fix th issue with the emails not loading properly but in all the app works!
+
+To get the app up and running on your Machine clone the repo or add the files individually. Make sure you run your "npm install" command then make sure you've installed inquirer. After that Run "Node App.js" and you'll get the questions shown above.
