@@ -1,0 +1,30 @@
+{
+  "name": "16-stu_mock-fs",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Ryan Lackey",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  },
+  "keywords": [],
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyRyIT/Tean-Profile-Generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RyRyIT/Tean-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/RyRyIT/Tean-Profile-Generator#readme"
+}
