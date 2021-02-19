@@ -1,149 +1,152 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const style = require("./templates/css")
+const style = require("./templates/css");
 
-const Employee = require("./lib/employee")
-const Engineer = require("./lib/engineer")
-const Manager = require("./lib/manager")
-const Intern = require("./lib/intern")
+const Employee = require("./lib/employee");
+const Engineer = require("./lib/engineer");
+const Manager = require("./lib/manager");
+const Intern = require("./lib/intern");
 
 let finalTeamArray = [];
 
-
 function startingPrompt() {
-    inquirer.prompt([
-        {
-            message: "///////// Team Generator! Please write your team name://///////",
-            name: "teamname"
-        }
+  inquirer
+    .prompt([
+      {
+        message:
+          "///////// Team Generator! Please write your team name://///////",
+        name: "teamname",
+      },
     ])
-        .then(function(data){
-            const teamName = data.teamname
-            finalTeamArray.push(teamName)
-            addManager();
-        })
-
-    
+    .then(function (data) {
+      const teamName = data.teamname;
+      finalTeamArray.push(teamName);
+      addManager();
+    });
 }
 
 function addManager() {
-    inquirer.prompt([
-        {
-            message: "What is your team manager's name?",
-            name: "name"
-        },
-        {
-            message: "What is your team manager's email address?",
-            name: "email"
-        },
+  inquirer
+    .prompt([
+      {
+        message: "What is your team manager's name?",
+        name: "name",
+      },
+      {
+        message: "What is your team manager's email address?",
+        name: "email",
+      },
 
-        {
-            type: "number",
-            message: "What is your team manager's office number?",
-            name: "officeNumber"
-        },
+      {
+        type: "number",
+        message: "What is your team manager's office number?",
+        name: "officeNumber",
+      },
     ])
 
-        .then(function (data) {
-            const name = data.name
-            const id = 1
-            const email = data.email
-            const officeNumber = data.officeNumber
-            const teamMember = new Manager(name, id, email, officeNumber)
-            finalTeamArray.push(teamMember)
-            addTeamMembers();
-        });
-
+    .then(function (data) {
+      const name = data.name;
+      const id = 1;
+      const email = data.email;
+      const officeNumber = data.officeNumber;
+      const teamMember = new Manager(name, id, email, officeNumber);
+      finalTeamArray.push(teamMember);
+      addTeamMembers();
+    });
 }
 
 function addTeamMembers() {
-    inquirer.prompt([
-        {
-            type: "list",
-            message: "Would you like to add more team members?",
-            choices: ["Yes, add an engineer", "Yes, add an intern", "No, my team is complete"],
-            name: "addMemberData"
-        }
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        message: "Would you like to add more team members?",
+        choices: [
+          "Yes, add an engineer",
+          "Yes, add an intern",
+          "No, my team is complete",
+        ],
+        name: "addMemberData",
+      },
     ])
 
-        .then(function (data) {
+    .then(function (data) {
+      switch (data.addMemberData) {
+        case "Yes, add an engineer":
+          addEngineer();
+          break;
 
-            switch (data.addMemberData) {
-                case "Yes, add an engineer":
-                    addEngineer();
-                    break;
-
-                case "Yes, add an intern":
-                    addIntern();
-                    break;
-                case "No, my team is complete":
-                    compileTeam();
-                    break;
-            }
-        });
+        case "Yes, add an intern":
+          addIntern();
+          break;
+        case "No, my team is complete":
+          compileTeam();
+          break;
+      }
+    });
 }
 
 function addEngineer() {
-    inquirer.prompt([
-        {
-            message: "What is this engineer's name?",
-            name: "name"
-        },
-        {
-            message: "What is this engineer's email address?",
-            name: "email"
-        },
-        {
-            message: "What is this engineer's Github profile?",
-            name: "github"
-        }
+  inquirer
+    .prompt([
+      {
+        message: "What is this engineer's name?",
+        name: "name",
+      },
+      {
+        message: "What is this engineer's email address?",
+        name: "email",
+      },
+      {
+        message: "What is this engineer's Github profile?",
+        name: "github",
+      },
     ])
 
-        .then(function (data) {
-            const name = data.name
-            const id = finalTeamArray.length + 1
-            const email = data.email
-            const github = data.github
-            const teamMember = new Engineer(name, id, email, github)
-            finalTeamArray.push(teamMember)
-            addTeamMembers()
-        });
-
-};
+    .then(function (data) {
+      const name = data.name;
+      const id = finalTeamArray.length + 1;
+      const email = data.email;
+      const github = data.github;
+      const teamMember = new Engineer(name, id, email, github);
+      finalTeamArray.push(teamMember);
+      addTeamMembers();
+    });
+}
 
 function addIntern() {
-    inquirer.prompt([
-        {
-            message: "What is this intern's name?",
-            name: "name"
-        },
-        {
-            message: "What is this intern's email address?",
-            name: "email"
-        },
-        {
-            message: "What is this intern's school?",
-            name: "school"
-        }
+  inquirer
+    .prompt([
+      {
+        message: "What is this intern's name?",
+        name: "name",
+      },
+      {
+        message: "What is this intern's email address?",
+        name: "email",
+      },
+      {
+        message: "What is this intern's school?",
+        name: "school",
+      },
     ])
 
-        .then(function (data) {
-            const name = data.name
-            const id = finalTeamArray.length + 1
-            const email = data.email
-            const school = data.school
-            const teamMember = new Intern(name, id, email, school)
-            finalTeamArray.push(teamMember)
-            addTeamMembers()
-        });
-
-};
+    .then(function (data) {
+      const name = data.name;
+      const id = finalTeamArray.length + 1;
+      const email = data.email;
+      const school = data.school;
+      const teamMember = new Intern(name, id, email, school);
+      finalTeamArray.push(teamMember);
+      addTeamMembers();
+    });
+}
 
 function compileTeam() {
-    console.log("//////////Great Job!!!.////////")
+  console.log("//////////Great Job!!!.////////");
 
-    const htmlArray = []
-    const htmlBeginning = `
+  const htmlArray = [];
+  const htmlBeginning = `
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -161,11 +164,11 @@ function compileTeam() {
         <h1>${finalTeamArray[0]}</h1>
     </div>
     <div class="card-container">
-    `
-    htmlArray.push(htmlBeginning);
+    `;
+  htmlArray.push(htmlBeginning);
 
-    for (let i = 1; i < finalTeamArray.length; i++) {
-        let object = `
+  for (let i = 1; i < finalTeamArray.length; i++) {
+    let object = `
         <div class="member-card">
             <div class="card-top">
                 <h2>${finalTeamArray[i].name}</h2>
@@ -174,39 +177,41 @@ function compileTeam() {
             <div class="card-bottom">
                 <p>Employee ID: ${finalTeamArray[i].id}</p>
                 <p>Email: <a href="mailto:${finalTeamArray[i].email}">${finalTeamArray[i].email}</a>></p>
-        `
-        if (finalTeamArray[i].officeNumber) {
-            object += `
+        `;
+    if (finalTeamArray[i].officeNumber) {
+      object += `
             <p>${finalTeamArray[i].officeNumber}</p>
-            `
-        }
-        if (finalTeamArray[i].github) {
-            object += `
-            <p>GitHub: <a href="https://github.com/${finalTeamArray[i].github}">${finalTeamArray[i].github}</a></p>
-            `
-        }
-        if (finalTeamArray[i].school) {
-            object += `
-            <p>School: ${finalTeamArray[i].school}</p>
-            `
-        }
-        object += `
-        </div>
-        </div>
-        `
-        htmlArray.push(object)
+            `;
     }
+    if (finalTeamArray[i].github) {
+      object += `
+            <p>GitHub: <a href="https://github.com/${finalTeamArray[i].github}">${finalTeamArray[i].github}</a></p>
+            `;
+    }
+    if (finalTeamArray[i].school) {
+      object += `
+            <p>School: ${finalTeamArray[i].school}</p>
+            `;
+    }
+    object += `
+        </div>
+        </div>
+        `;
+    htmlArray.push(object);
+  }
 
-    const htmlEnd = `
+  const htmlEnd = `
     </div>
     </body>
     </html>
-    `
-    htmlArray.push(htmlEnd);
+    `;
+  htmlArray.push(htmlEnd);
 
-    fs.writeFile(`./generated-html/${finalTeamArray[0]}.html`, htmlArray.join(""), function (err) {
-        
-    })
+  fs.writeFile(
+    `./generated-html/${finalTeamArray[0]}.html`,
+    htmlArray.join(""),
+    function (err) {}
+  );
 }
 
-startingPrompt()
+startingPrompt();
