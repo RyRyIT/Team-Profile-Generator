@@ -1,7 +1,5 @@
 # Team-Profile-Generator 
-This app is used to create profiles for members for one team 
-The app easily creates profiles for each individual on your team 
-This is a CLI app which takes the answers in the terminal of the code editing console
+The Team Profile Generator is a command-line-input application run in Node that requests information from the user about members of an engineering team and generates an HTML file displaying that information. Before running the application the user must perform an npm install to install all required dependencies.
 
 # IMAGES 
 
